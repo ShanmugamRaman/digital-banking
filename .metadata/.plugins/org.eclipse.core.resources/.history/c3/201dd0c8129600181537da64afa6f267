@@ -1,0 +1,10 @@
+package com.digitalbank.shan.transactionmanagementserver.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TransactionManagementController {
+	
+	
+
+}

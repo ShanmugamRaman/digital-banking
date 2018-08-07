@@ -1,0 +1,83 @@
+package com.digitalbank.shan.customerserver.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+import com.digitalbank.shan.customerserver.service.CustomerService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class CustomerController {
+
+	@Autowired
+	private CustomerService customerService;
+
+	@GetMapping("/customers")
+	@HystrixCommand(fallbackMethod = "fallbackGetAllCustomers")
+	public List<Customer> getAllCustomers() {
+		return customerService.findAllActiveCustomers();
+	}
+
+	public List<Customer> fallbackGetAllCustomers() {
+		//Log as error
+		return new ArrayList<Customer>();
+	}
+	
+	@GetMapping("/customers/{customerId}")
+	@HystrixCommand(fallbackMethod = "fallbackGetCustomerById")
+	public Customer getCustomerById(@PathParam("customerId") final Long customerId) {
+		System.out.println("Fetching Customer : "+customerId);
+		return customerService.findCustomerById(customerId);
+	}
+	
+	public Customer fallbackGetCustomerById() {
+		return new Customer();
+	}
+
+	@PostMapping("/customers")
+	public ResponseEntity<Customer> addCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return new ResponseEntity<Customer>(HttpStatus.BAD_REQUEST); 
+		}else {
+			return customerService.addCustomer(customer);
+		}
+		
+	}
+	
+	@PutMapping("/customers/{customerId}")
+	public ResponseEntity<Customer> updateCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult){
+		if(bindingResult.hasErrors()) {
+			return new ResponseEntity<Customer>(HttpStatus.BAD_REQUEST); 
+		}else {
+			if(isActiveCustomer(customer.getCustomerId())) {
+				return customerService.addCustomer(customer);
+			}else {
+				return new ResponseEntity<Customer>(HttpStatus.NOT_MODIFIED);
+			}
+		}
+	}
+	
+	private boolean isActiveCustomer(Long customerId) {
+		return customerService.isActiveCustomer(customerId);
+	}
+	
+
+}

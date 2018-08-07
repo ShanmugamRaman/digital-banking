@@ -1,0 +1,5 @@
+package com.digitalbank.shan.transactionserver.model;
+
+public class Customer {
+
+}

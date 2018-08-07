@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: eureka-service
+    
+server:
+  port: 9000
+  
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+        defaultZone: http://localhost:9000/eureka
+     
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    customer-service:
+      path: /customer-service/**
+      url: http://localhost:9001
+    account-service:
+      path: /account-service/**
+      url: http://localhost:9002
+    transaction-service:
+      path: /transaction-service/**
+      url: http://localhost:9003
+    customer-management-service:
+      path: /customer-management-service/**
+      url: http://localhost:9004
+    transaction-management-service:
+      path: /transaction-management-service/**
+      url: http://localhost:9005

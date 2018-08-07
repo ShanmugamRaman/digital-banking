@@ -1,0 +1,27 @@
+package com.digitalbank.shan.transactionserver.controller;
+
+import java.util.List;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.transactionserver.model.Transaction;
+import com.digitalbank.shan.transactionserver.service.TransactionService;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class TransactionController {
+
+	@Autowired
+	private TransactionService transactionService;
+	
+	@GetMapping("/transactions/{transactionId}")
+	public List<Transaction> getTransactionById(@PathParam("transactionId") final Long transactionId) {
+		return transactionService.getTransactionsById(transactionId);
+	}
+	
+}

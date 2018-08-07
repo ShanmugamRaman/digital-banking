@@ -1,0 +1,14 @@
+
+”squid:S2637"i"customerId" is marked "javax.validation.constraints.NotNull" but is not initialized in this constructor.(›è§âùÿÿÿÿH³RMINORZBUG
+‡squid:S3973a"WUse curly braces or indentation to denote the code conditionally executed by this "if".(şï¾H´RCRITICALZ
+CODE_SMELL
+‡squid:S3973f"WUse curly braces or indentation to denote the code conditionally executed by this "if".(İ¥õäHµRCRITICALZ
+CODE_SMELL
+‡squid:S3973k"WUse curly braces or indentation to denote the code conditionally executed by this "if".(Ó«³ïH¶RCRITICALZ
+CODE_SMELL
+Œsquid:S3973p"WUse curly braces or indentation to denote the code conditionally executed by this "if".(æºË—úÿÿÿÿH·RCRITICALZ
+CODE_SMELL
+ssquid:S1126r"AReplace this if-then-else statement by a single return statement.(ùèÚöşÿÿÿÿH¸RMINORZ
+CODE_SMELL
+‚squid:S3776V"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ÜÑãH¹RCRITICALZ
+CODE_SMELL

@@ -1,0 +1,33 @@
+package com.digitalbank.shan.customerserver.service;
+
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+import com.digitalbank.shan.customerserver.repository.CustomerRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+public class CustomerServiceTest {
+
+	@Mock
+	private CustomerRepository customerRepository;
+	
+	@InjectMocks
+	private CustomerService customerService;
+	
+	@Test
+	public void testAllActiveCustomers() {
+		
+		when(customerRepository.findAll()).thenReturn(new ArrayList<Customer>())
+		customerService.findAllActiveCustomers();
+		
+	}
+	
+}

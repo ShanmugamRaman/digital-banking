@@ -1,0 +1,79 @@
+package com.digitalbank.shan.transactionserver.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.digitalbank.shan.transactionserver.feign.AccountFeignService;
+import com.digitalbank.shan.transactionserver.model.Account;
+import com.digitalbank.shan.transactionserver.model.Transaction;
+import com.digitalbank.shan.transactionserver.repository.TransactionRepository;
+
+@Service
+public class TransactionService {
+
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private AccountFeignService accountService;
+	
+	public List<Transaction> getTransactionsById(Long transactionId) {
+		
+		List<Transaction> transactions = new ArrayList<>();
+		transactionRepository.findById(transactionId).ifPresent(transaction -> transactions.add(transaction));
+		return transactions;
+		
+	}
+
+	public ResponseEntity<Transaction> addTransaction(Transaction transaction) {
+
+		ResponseEntity<Transaction> responseEntity = validTransaction(transaction);
+		
+		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+			transactionRepository.save(transaction);
+			
+			//logics to update the current out-standing balance
+			Account fromAccount = accountService.getAccountByAccountId(transaction.getfromAccountId());
+			fromAccount.getCurrentOutstandingBalance().subtract(transaction.getAmountTransacted());
+			accountService.updateAccount(fromAccount);
+			
+			Account toAccount = accountService.getAccountByAccountId(transaction.getToCustomerId());
+			toAccount.getCurrentOutstandingBalance().add(transaction.getAmountTransacted());
+			accountService.updateAccount(toAccount);
+			
+			return new ResponseEntity<Transaction>(transaction, HttpStatus.CREATED);
+			
+		}else {
+			return responseEntity;
+		}
+		
+	}
+
+	private ResponseEntity<Transaction> validTransaction(Transaction transaction) {
+		Account fromAccount = accountService.getAccountByAccountId(transaction.getfromAccountId()); 
+		if( fromAccount == null) {
+			System.out.println("Incorrect From Id");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}else if (accountService.getAccountByAccountId(transaction.getToCustomerId()) == null) {
+			System.out.println("Incorrect To Id");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}else if (fromAccount.getCurrentOutstandingBalance().compareTo(transaction.getAmountTransacted()) < 0) {
+			System.out.println("Transfer Amount is Greater than Outstanding Balance");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Transaction>(transaction, HttpStatus.OK);
+		
+	}
+
+	public List<Transaction> getTransactionsByAccountId(Long accountId) {
+		return transactionRepository.findByAccountId(accountId);
+	}
+
+	
+	
+}

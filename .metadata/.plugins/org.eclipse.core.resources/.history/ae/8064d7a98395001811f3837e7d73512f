@@ -1,0 +1,43 @@
+package com.digitalbank.shan.accountserver.service;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
+import com.digitalbank.shan.accountserver.model.Account;
+import com.digitalbank.shan.accountserver.repository.AccountRepository;
+
+public class AccountService {
+	
+	@Autowired
+	private AccountRepository accountRepository;
+
+	public List<Account> getAllAccounts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Account getAccountByAccountId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Account> getAccountsByCustomerId(Long customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResponseEntity<Account> addAccount(@Valid Account account) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isActiveAccount(Long accountId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

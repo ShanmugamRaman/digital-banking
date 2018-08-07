@@ -1,0 +1,5 @@
+package com.digitalbank.shan.customerserver.repository;
+
+public interface CustomerRepository {
+
+}

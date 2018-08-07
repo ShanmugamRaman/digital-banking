@@ -1,0 +1,27 @@
+package com.digitalbank.shan.customermanagementserver.controller;
+
+import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class CustomerManagementController {
+
+	@GetMapping("/customers/{customerId}")
+	public Customer getCustomerById(@PathParam("customerId") final Long customerId);
+	
+	@PostMapping("/customers")
+	public ResponseEntity<Customer> addCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult)
+	
+}

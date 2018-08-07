@@ -1,0 +1,9 @@
+package com.digitalbank.shan.transactionserver.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.digitalbank.shan.transactionserver.model.Transaction;
+
+public interface TransactionRepository extends CrudRepository<Transaction, Long>{
+
+}

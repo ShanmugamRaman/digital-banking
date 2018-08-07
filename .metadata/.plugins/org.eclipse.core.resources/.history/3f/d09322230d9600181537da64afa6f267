@@ -1,0 +1,18 @@
+package com.digitalbank.shan.customermanagementserver.feign;
+
+import java.util.List;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.digitalbank.shan.accountserver.model.Account;
+
+@FeignClient("account-service")
+public interface AccountFeignService {
+
+	@GetMapping("/customers/{customerId}/accounts")
+	public List<Account> getAccountsByCustomerId(@PathParam("customerId") final Long customerId)
+	
+}

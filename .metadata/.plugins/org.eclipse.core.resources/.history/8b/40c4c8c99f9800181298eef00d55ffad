@@ -1,0 +1,52 @@
+package com.digitalbank.shan.customerserver.service;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+import com.digitalbank.shan.customerserver.repository.CustomerRepository;
+
+
+@RunWith(MockitoJUnitRunner.class)
+public class CustomerServiceTest {
+
+	@Mock
+	private CustomerRepository customerRepository;
+	
+	@InjectMocks
+	private CustomerService customerService;
+	
+	@Test
+	public void testAllActiveCustomers() {
+		List<Customer> customers = new ArrayList<Customer>();
+		customers.add(new Customer("ABC", "1234", "abc@mn.com", true));
+		when(customerRepository.findAll()).thenReturn(customers);
+		List<Customer> returnedCustomers = customerService.findAllActiveCustomers();
+		assertTrue(returnedCustomers.size() == customers.size());
+		
+	}
+	
+	
+	@Test
+	public void testAllActiveCustomersByPassingInActiveCustomer() {
+		List<Customer> customers = new ArrayList<Customer>();
+		customers.add(new Customer("ABC", "1234", "abc@mn.com", true));
+		customers.add(new Customer("XYZ", "1234", "XYZ@mn.com", false));
+		
+		when(customerRepository.findAll()).thenReturn(customers);
+		
+		List<Customer> returnedCustomers = customerService.findAllActiveCustomers();
+		assertTrue(returnedCustomers.size() == 1);
+		
+	}
+	
+}

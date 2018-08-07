@@ -1,0 +1,9 @@
+
+^squid:S1602A",Remove useless curly braces around statement(Œ£ç·ýÿÿÿÿHîRMINORZ
+CODE_SMELL
+‹squid:S2293-"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÉŒ ‘üÿÿÿÿHíRMINORZ
+CODE_SMELL
+‘squid:S1149@"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(”¼Þ£úÿÿÿÿHêRMAJORZ
+CODE_SMELL
+‘squid:S1149O"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(”¼Þ£úÿÿÿÿHìRMAJORZ
+CODE_SMELL

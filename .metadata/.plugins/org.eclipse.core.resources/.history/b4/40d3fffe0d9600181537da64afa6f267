@@ -1,0 +1,36 @@
+package com.digitalbank.shan.customermanagementserver.controller;
+
+import java.util.List;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.customermanagementserver.feign.AccountFeignService;
+import com.digitalbank.shan.customermanagementserver.feign.CustomerFeignService;
+import com.digitalbank.shan.customermanagementserver.model.Account;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class CustomerManagementController {
+	
+	@Autowired
+	private CustomerFeignService customerService;
+	
+	@Autowired
+	private AccountFeignService accountService;
+	
+	@GetMapping("/customers/{customerId}/accounts")
+	public List<Account> getAccountsByCustomerId(@PathParam("customerId") final Long customerId){
+		
+		if(customerService.getCustomerById(customerId) != null) {
+			return accountService.getAccountsByCustomerId(customerId);
+		}
+		return null;
+	}
+	
+	
+}

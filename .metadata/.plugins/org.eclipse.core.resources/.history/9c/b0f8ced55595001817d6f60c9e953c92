@@ -1,0 +1,14 @@
+package com.digitalbank.shan.customerserver.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Customer {
+	
+	@Id
+	@org.hibernate.annotations.Generated
+	private long customerId;
+	
+
+}

@@ -1,0 +1,29 @@
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    customer-service:
+      path: /**/customers/**
+      service-id: customer-service
+      #url: http://localhost:9001
+#    account-service:
+#      path: /account-service/**
+#      url: http://localhost:9002
+#    transaction-service:
+#      path: /transaction-service/**
+#      url: http://localhost:9003
+#    customer-management-service:
+#      path: /customer-management-service/**
+#      url: http://localhost:9004
+#    transaction-management-service:
+#      path: /transaction-management-service/**
+#      url: http://localhost:9005
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+    registerWithEureka: false
+      
+server:
+  port: 8888

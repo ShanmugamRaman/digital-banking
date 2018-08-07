@@ -1,0 +1,5 @@
+package com.digitalbank.shan.customerserver.config;
+
+public class SwaggerConfiguration {
+
+}

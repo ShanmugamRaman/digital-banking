@@ -1,0 +1,8 @@
+package com.digitalbank.shan.customerserver.controller;
+
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class CustomerControllerAdvice {
+
+}

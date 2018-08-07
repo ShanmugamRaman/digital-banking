@@ -1,0 +1,32 @@
+package com.digitalbank.shan.accountserver.service;
+
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.digitalbank.shan.accountserver.repository.AccountRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AccountServiceTest {
+
+	@Mock
+	private AccountRepository accountRepository;
+	
+	@InjectMocks
+	private AccountService accountService;
+	
+	@Test
+	public void testFetchAllAccounts() {
+		
+		java.util.List<E>
+		
+		when(accountRepository.findAll())
+		.thenReturn(null)
+		
+	}
+	
+}

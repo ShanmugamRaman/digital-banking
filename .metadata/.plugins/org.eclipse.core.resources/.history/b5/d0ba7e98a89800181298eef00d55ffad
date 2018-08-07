@@ -1,0 +1,5 @@
+package com.digitalbank.shan.accountserver.advice;
+
+public class AccountControllerAdvice {
+
+}

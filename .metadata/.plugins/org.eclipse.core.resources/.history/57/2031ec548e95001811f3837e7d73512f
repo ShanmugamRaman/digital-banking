@@ -1,0 +1,6 @@
+package com.digitalbank.shan.transactionserver;
+
+
+public interface CustomerFeignService {
+
+}

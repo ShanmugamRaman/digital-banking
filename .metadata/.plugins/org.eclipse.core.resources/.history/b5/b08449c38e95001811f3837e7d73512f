@@ -1,0 +1,15 @@
+package com.digitalbank.shan.transactionserver.feign;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.digitalbank.shan.transactionserver.model.Customer;
+
+@FeignClient(name = "customer-server")
+public interface CustomerFeignService {
+	
+	public Customer getCustomerById(@PathParam("customerId") final Long customerId);
+
+}

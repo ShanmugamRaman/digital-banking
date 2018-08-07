@@ -1,0 +1,45 @@
+package com.digitalbank.shan.customerserver.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+import com.digitalbank.shan.customerserver.repository.CustomerRepository;
+
+@Service
+public class CustomerService {
+
+	@Autowired
+	private CustomerRepository customerRepository;
+
+	public List<Customer> findAllActiveCustomers() {
+
+		List<Customer> activeCustomers = new ArrayList<>();
+
+		customerRepository.findAll().forEach(customer -> {
+			if (customer.isActive()) {
+				activeCustomers.add(customer);
+			}
+		});
+
+		return activeCustomers;
+	}
+
+	public Customer findCustomerById(Long customerId) {
+		return customerRepository.findById(customerId).orElse(null);
+	}
+
+	public ResponseEntity<Customer> addCustomer(Customer customer) {
+		customerRepository.save(customer);
+		return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+	}
+
+	public boolean isActiveCustomer(Long customerId) {
+		return customerRepository.existsById(customerId);
+	}
+
+}

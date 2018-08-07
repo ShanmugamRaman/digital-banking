@@ -1,0 +1,16 @@
+package com.digitalbank.shan.transactionserver.feign;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.digitalbank.shan.transactionserver.model.Account;
+
+@FeignClient(name = "account-server")
+public interface AccountFeignService {
+	
+	@GetMapping("/accounts/{accountId}")
+	public Account getAccountById(@PathParam("accountId") final Long accountId);
+
+}

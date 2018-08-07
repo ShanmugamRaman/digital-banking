@@ -1,0 +1,27 @@
+package com.digitalbank.shan.transactionmanagementserver.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.digitalbank.shan.transactionmanagementserver.feign.TransactionFeignService;
+import com.digitalbank.shan.transactionmanagementserver.model.Transaction;
+
+public class TransactionManagementService {
+	
+	@Autowired
+	private TransactionFeignService transactionService;
+	
+
+	public List<Transaction> getFilteredTransactions(Long accountId, String startDate, String endDate, int offset,
+			int size) {
+		
+		return transactionService.getTransactionByAccountId(accountId)
+				.stream()
+				.skip(offset)
+				.limit(size)
+				.collect(Collectors.toList());
+	
+	}
+
+}

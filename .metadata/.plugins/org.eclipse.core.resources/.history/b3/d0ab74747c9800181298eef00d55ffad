@@ -1,0 +1,17 @@
+package com.digitalbank.shan.customerserver.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.digitalbank.shan.customerserver.exception.InvalidInputException;
+
+@RestControllerAdvice
+public class CustomerControllerAdvice {
+
+	@ExceptionHandler(value = InvalidInputException.class)
+	public ResponseEntity<String> redirectError(){
+		
+	}
+	
+}

@@ -1,0 +1,12 @@
+package com.digitalbank.shan.transactionserver.feign;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+import com.digitalbank.shan.transactionserver.model.Account;
+
+@FeignClient(name = "account-server")
+public interface AccountFeignService {
+	
+	public Account getAccountByAccountId(Long accountId);
+
+}

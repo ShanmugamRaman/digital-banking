@@ -1,0 +1,19 @@
+package com.digitalbank.shan.customerserver.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.digitalbank.shan.customerserver.model.Customer;
+
+public class CustomerService {
+	
+	@Autowired
+	private CustomerRepository customerRepository;
+
+	public List<Customer> findAllActiveCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

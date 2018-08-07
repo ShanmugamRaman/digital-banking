@@ -1,0 +1,12 @@
+package com.digitalbank.shan.transactionserver.model;
+
+import java.util.Date;
+
+public class Transaction {
+
+	private Long transactionId;
+	private Long fromCustomerId;
+	private Long toCustomerId;
+	private 
+	
+}

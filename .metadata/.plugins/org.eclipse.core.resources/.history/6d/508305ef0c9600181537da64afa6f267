@@ -1,0 +1,5 @@
+package com.digitalbank.shan.customermanagementserver.feign;
+
+public interface AccountFeignService {
+
+}

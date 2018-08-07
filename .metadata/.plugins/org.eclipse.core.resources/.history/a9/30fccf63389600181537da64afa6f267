@@ -1,0 +1,36 @@
+package com.digitalbank.shan.transactionmanagementserver.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.transactionmanagementserver.model.Transaction;
+import com.digitalbank.shan.transactionmanagementserver.service.TransactionManagementService;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class TransactionManagementController {
+
+	
+	@Autowired
+	private TransactionManagementService transactionMgmtService;
+
+	@GetMapping("/accounts/{accountId}/transactions/startDate/{startDate}/endDate/{endDate}?offset={offset}&size={size}")
+	public List<Transaction> getTransactionsByAccountId(@PathParam("accountId") final Long accountId,
+			@PathParam("startDate") Date startDate,
+			@PathParam("endDate") Date endDate,
+			@QueryParam("offset") int offset, 
+			@QueryParam("size") int size) {
+		
+		return transactionMgmtService.getFilteredTransactions(accountId, startDate, endDate, offset, size);
+
+	}
+
+}

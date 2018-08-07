@@ -1,0 +1,27 @@
+zuul:
+  prefix: /api
+  routes:
+    customer-service:
+      path: /customers/**
+      service-id: customer-service
+    account-service:
+      path: /accounts/**
+      service-id: account-service
+    transaction-service:
+      path: /transactions/**
+      service-id: transaction-service
+    customer-management-service:
+      path: /customerManagement/**
+      service-id: customer-management-service
+    transaction-management-service:
+      path: /transactionManagement/**
+      service-id: transaction-management-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+    registerWithEureka: false
+      
+server:
+  port: 8888

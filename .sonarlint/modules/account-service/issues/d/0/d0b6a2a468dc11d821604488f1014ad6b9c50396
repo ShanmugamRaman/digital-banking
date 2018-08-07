@@ -1,0 +1,19 @@
+
+}squid:CommentedOutCodeLineA"<This block of commented-out lines of code should be removed.(ÜõÌ›ıÿÿÿÿHÂRMAJORZ
+CODE_SMELL
+†squid:S2293b"YReplace the type specification in this constructor call with the diamond operator ("<>").(ğä˜“HÁRMINORZ
+CODE_SMELL
+^squid:S1602K",Remove useless curly braces around statement(Œ£ç·ıÿÿÿÿHÅRMINORZ
+CODE_SMELL
+csquid:S1172/"1Remove this unused method parameter "customerId".(‡ÒüàûÿÿÿÿHÃRMAJORZ
+CODE_SMELL
+Xsquid:S11681"+Return an empty collection instead of null.(¥¹ïHÄRMAJORZ
+CODE_SMELL
+€squid:ModifiersOrderCheck "EReorder the modifiers to comply with the Java Language Specification.(—øHÀRMINORZ
+CODE_SMELL
+‘squid:S1149J"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(”¼Ş£úÿÿÿÿHÇRMAJORZ
+CODE_SMELL
+^squid:S1602Z",Remove useless curly braces around statement(Œ£ç·ıÿÿÿÿHÆRMINORZ
+CODE_SMELL
+‘squid:S1149Y"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(”¼Ş£úÿÿÿÿHÈRMAJORZ
+CODE_SMELL

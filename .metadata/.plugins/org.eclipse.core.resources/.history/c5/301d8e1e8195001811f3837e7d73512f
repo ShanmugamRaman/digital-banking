@@ -1,0 +1,47 @@
+package com.digitalbank.shan.accountserver.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Account {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long accountId;
+	
+	private String accountName;
+	private Double currentOutstandingBalance;
+	
+	public Account() { }
+	
+	public Account(String accountName, Double currentOutstandingBalance) {
+		this.accountName = accountName;
+		this.currentOutstandingBalance = currentOutstandingBalance;
+	}
+
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
+	public Double getCurrentOutstandingBalance() {
+		return currentOutstandingBalance;
+	}
+
+	public void setCurrentOutstandingBalance(Double currentOutstandingBalance) {
+		this.currentOutstandingBalance = currentOutstandingBalance;
+	}
+
+	public Long getAccountId() {
+		return accountId;
+	}
+
+	
+	
+}

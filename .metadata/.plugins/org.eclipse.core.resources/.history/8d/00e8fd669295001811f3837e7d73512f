@@ -1,0 +1,25 @@
+package com.digitalbank.shan.transactionserver.feign;
+
+import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.digitalbank.shan.transactionserver.model.Account;
+
+@FeignClient(name = "account-server")
+public interface AccountFeignService {
+	
+	@GetMapping("/accounts/{accountId}")
+	public Account getAccountByAccountId(@PathParam("accountId") final Long accountId);
+	
+	@PutMapping("/accounts/{accountId}")
+	public ResponseEntity<Account> updateAccount(@RequestBody final @Valid Account account, @PathParam("accountId") Long accountId,
+			BindingResult bindingResult);
+
+}

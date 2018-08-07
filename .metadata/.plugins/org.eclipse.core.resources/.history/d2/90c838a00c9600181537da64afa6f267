@@ -1,0 +1,8 @@
+package com.digitalbank.shan.customermanagementserver.feign;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient("customer-service")
+public interface CustomerFeignService {
+
+}

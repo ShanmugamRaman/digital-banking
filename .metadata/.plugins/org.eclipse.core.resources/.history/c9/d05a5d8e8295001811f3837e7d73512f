@@ -1,0 +1,39 @@
+package com.digitalbank.shan.accountserver;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.accountserver.model.Account;
+import com.digitalbank.shan.accountserver.service.AccountService;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class AccountController {
+
+	@Autowired
+	private AccountService accountService;
+	
+	@GetMapping("/accounts")
+	public List<Account> getAllAccounts(){
+		return accountService.getAllAccounts();
+	}
+	
+	@GetMapping("/accounts/{accountId}")
+	public Account getAccountById(@PathParam("accountId") final Long accountId) {
+		return accountService.getAccountByAccountId();
+	}
+	
+	@GetMapping("/customers/{customerId}/accounts")
+	public List<Account> getAccountsByCustomerId(@PathParam("customerId") final Long customerId){
+		return accountService.getAccountsByCustomerId(customerId);
+		//return getAllAccounts().stream().filter(account -> account.getCustomerId().equals(customerId)).collect(Collectors.toList());
+	}
+	
+}

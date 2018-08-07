@@ -1,0 +1,51 @@
+package com.digitalbank.shan.transactionserver.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.digitalbank.shan.transactionserver.model.Transaction;
+import com.digitalbank.shan.transactionserver.repository.TransactionRepository;
+
+@Service
+public class TransactionService {
+
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
+	public List<Transaction> getTransactionsById(Long transactionId) {
+		
+		List<Transaction> transactions = new ArrayList<>();
+		transactionRepository.findById(transactionId).ifPresent(transaction -> transactions.add(transaction));
+		return transactions;
+		
+	}
+
+	public ResponseEntity<Transaction> addTransaction(Transaction transaction) {
+
+		ResponseEntity<Transaction> responseEntity = validTransaction(transaction);
+		
+		if(responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+			transactionRepository.save(transaction);
+			return new ResponseEntity<Transaction>(transaction, HttpStatus.CREATED);
+		}else {
+			return responseEntity;
+		}
+		
+	}
+
+	private ResponseEntity<Transaction> validTransaction(Transaction transaction) {
+		
+		
+		
+	}
+
+	
+	
+}

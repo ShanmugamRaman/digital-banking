@@ -1,0 +1,28 @@
+package com.digitalbank.shan.customermanagementserver.feign;
+
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.digitalbank.shan.customermanagementserver.model.Customer;
+
+@FeignClient("customer-service")
+@Service
+public interface CustomerFeignService {
+
+	@GetMapping("/customers/{customerId}")
+	public Customer getCustomerById(@PathParam("customerId") final Long customerId);
+	
+	/*@PostMapping("/customers")
+	public ResponseEntity<Customer> addCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult);
+	
+	@PutMapping("/customers/{customerId}")
+	public ResponseEntity<Customer> updateCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult);
+	*/
+
+
+}

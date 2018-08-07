@@ -1,0 +1,23 @@
+package com.digitalbank.shan.transactionserver.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbank.shan.transactionserver.model.Transaction;
+import com.digitalbank.shan.transactionserver.repository.TransactionRepository;
+
+@Service
+public class TransactionService {
+
+	@Autowired
+	private TransactionRepository transactionRepository;
+	
+	public List<Transaction> getTransactionsById(Long transactionId) {
+		
+	}
+
+	
+	
+}

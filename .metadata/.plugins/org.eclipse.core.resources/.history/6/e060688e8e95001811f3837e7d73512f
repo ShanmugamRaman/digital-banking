@@ -1,0 +1,10 @@
+package com.digitalbank.shan.transactionserver.feign;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "customer-server")
+public interface CustomerFeignService {
+	
+	
+
+}

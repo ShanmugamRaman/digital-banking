@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: transaction-management-service
+    
+server:
+  port: 9005
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka

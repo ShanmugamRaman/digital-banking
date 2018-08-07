@@ -1,0 +1,54 @@
+package com.digitalbank.shan.transactionserver.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbank.shan.transactionserver.model.Transaction;
+import com.digitalbank.shan.transactionserver.service.TransactionService;
+
+@RestController
+@RequestMapping("/api/1.0")
+public class TransactionController {
+
+	@Autowired
+	private TransactionService transactionService;
+	
+	@GetMapping("/transactions/{transactionId}")
+	public List<Transaction> getTransactionById(@PathParam("transactionId") final Long transactionId) {
+		return transactionService.getTransactionsById(transactionId);
+	}
+	
+	@GetMapping("/transactions?accountId={accountId}")
+	public List<Transaction> getTransactionByAccountId(@QueryParam("accountId") final Long accountId) {
+		return transactionService.getTransactionsByAccountId(accountId);
+	}
+	
+	/** Achieves 
+	 * 		-> Withdrawal of account; fromCustomer is customer-id; toCustomer is system-id-for-encashment
+	 * 		-> Deposit of account; fromCustomer is system-id-for-deposit; toCustomer is customer-id
+	 * 		-> Transfer b/w 2 customers
+	 */
+	@PostMapping("/transactions")
+	public ResponseEntity<Transaction> addTransactions(@RequestBody @Valid final Transaction transaction, BindingResult bindingResult){
+		if(bindingResult.hasErrors()) {
+			return new ResponseEntity<Transaction>(HttpStatus.BAD_REQUEST); 
+		}else {
+			return transactionService.addTransaction(transaction);
+		}
+		
+	}
+	
+}

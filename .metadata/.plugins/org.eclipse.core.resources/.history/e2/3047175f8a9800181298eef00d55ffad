@@ -1,0 +1,18 @@
+package com.digitalbank.shan.customerserver.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.digitalbank.shan.customerserver.exception.InvalidInputException;
+
+@RestControllerAdvice
+public class CustomerControllerAdvice {
+
+	@ExceptionHandler(InvalidInputException.class)
+	public final ResponseEntity<String> handleInvalidInputException(InvalidInputException e) {
+	    return new ResponseEntity<>(e.getErrorMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
+}

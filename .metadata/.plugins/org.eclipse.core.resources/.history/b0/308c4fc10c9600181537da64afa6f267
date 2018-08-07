@@ -1,0 +1,32 @@
+package com.digitalbank.shan.customermanagementserver.feign;
+
+import javax.validation.Valid;
+import javax.ws.rs.PathParam;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.digitalbank.shan.customermanagementserver.controller.Customer;
+
+@FeignClient("customer-service")
+public interface CustomerFeignService {
+
+	@GetMapping("/customers/{customerId}")
+	public Customer getCustomerById(@PathParam("customerId") final Long customerId);
+	
+	@PostMapping("/customers")
+	public ResponseEntity<Customer> addCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult);
+	
+	@PutMapping("/customers/{customerId}")
+	public ResponseEntity<Customer> updateCustomer(@RequestBody final @Valid Customer customer,
+			BindingResult bindingResult)
+	
+
+
+}
